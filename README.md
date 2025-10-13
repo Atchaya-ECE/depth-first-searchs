@@ -44,7 +44,21 @@ Visit node 3
 Visit node 3
 
 Now, the Stack becomes empty, which means we have visited all the nodes, and our DFS traversal ends.
-# Program:
+# Depth First Search (DFS) Implementation
+def dfs(graph, start): visited = set() stack = [start] traversal = []
+```
+while stack:
+    node = stack.pop()
+    if node not in visited:
+        visited.add(node)
+        traversal.append(node)
+        # Add neighbors in reverse order to match sample output
+        stack.extend(reversed([nbr for nbr in graph[node] if nbr not in visited]))
+
+return traversal
+```
+# Driver code
+if name == "main": n, e = map(int, input().split()) graph = {}
 ```
 for _ in range(e):
     u, v = input().split()
