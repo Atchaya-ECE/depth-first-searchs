@@ -44,7 +44,22 @@ Visit node 3
 Visit node 3
 
 Now, the Stack becomes empty, which means we have visited all the nodes, and our DFS traversal ends.
+# Program:
+```
+for _ in range(e):
+    u, v = input().split()
+    if u not in graph:
+        graph[u] = []
+    if v not in graph:
+        graph[v] = []
+    graph[u].append(v)
+    graph[v].append(u)
+```
+# Start DFS from the first node given in the first edge
+start_node = list(graph.keys())[0]
 
+result = dfs(graph, start_node)
+print(result)
 <h3>Algorithm:</h3>
 <B><ol>
  <li>Construct a Graph with Nodes and Edges</li>
