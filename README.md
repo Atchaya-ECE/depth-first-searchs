@@ -44,44 +44,59 @@ Visit node 3
 Visit node 3
 
 Now, the Stack becomes empty, which means we have visited all the nodes, and our DFS traversal ends.
-# Depth First Search (DFS) Implementation
-def dfs(graph, start): visited = set() stack = [start] traversal = []
-```
-while stack:
-    node = stack.pop()
-    if node not in visited:
-        visited.add(node)
-        traversal.append(node)
-        # Add neighbors in reverse order to match sample output
-        stack.extend(reversed([nbr for nbr in graph[node] if nbr not in visited]))
 
-return traversal
+# Program:
 ```
-# Driver code
-if name == "main": n, e = map(int, input().split()) graph = {}
-```
+# DFS using Stack (Iterative) - Input Format Based
+
+def dfs(graph, start):
+    visited = set()
+    stack = [start]
+    result = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            result.append(node)
+
+            # Add neighbors in reverse order to maintain correct DFS order
+            for neighbor in reversed(graph[node]):
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+    return result
+
+
+# -------------------------
+# MAIN PROGRAM
+# -------------------------
+
+# Read number of nodes and edges
+n, e = map(int, input().split())
+
+graph = {}
+
+# Build graph dictionary
 for _ in range(e):
     u, v = input().split()
+
     if u not in graph:
         graph[u] = []
     if v not in graph:
         graph[v] = []
+
     graph[u].append(v)
-    graph[v].append(u)
-```
-# Start DFS from the first node given in the first edge
+    # If undirected graph, also add reverse
+    # graph[v].append(u)
+
+# Choose starting node (first node in graph)
 start_node = list(graph.keys())[0]
 
-result = dfs(graph, start_node)
-print(result)
-<h3>Algorithm:</h3>
-<B><ol>
- <li>Construct a Graph with Nodes and Edges</li>
- <li>Depth First Search Uses Stack and Recursion</li>
- <li>Insert a START node to the STACK</li>
- <li>Find its Successors Or neighbors and Check whether the node is visited or not</li>
- <li>If Not Visited, add it to the STACK. Else Call The Function Again Until No more nodes needs to be visited.</li>
-</ol></B>
+# Perform DFS
+output = dfs(graph, start_node)
+print(output)
+```
 
 <h3>Sample Input</h3>
 <hr>
@@ -115,6 +130,11 @@ F H <BR>
 <h3>Sample Output</h3>
 <hr>
 ['0', '1', '2', '3', '4']
+
+<hr>
+<h3>Output:</h3>
+<hr>
+<img width="822" height="753" alt="image" src="https://github.com/user-attachments/assets/fbedeba0-8f82-43a8-91e1-5a3d239c6974" />
 
 <hr>
 <h3>Result:</h3>
